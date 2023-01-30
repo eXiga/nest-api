@@ -4,6 +4,7 @@ import { ThreatsService } from './threats.service';
 
 describe('ThreatsController', () => {
   let controller: ThreatsController;
+  let service: ThreatsService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -12,9 +13,11 @@ describe('ThreatsController', () => {
     }).compile();
 
     controller = module.get<ThreatsController>(ThreatsController);
+    service = module.get<ThreatsService>(ThreatsService);
   });
 
   it('should be defined', () => {
     expect(controller).toBeDefined();
+    expect(service).toBeDefined();
   });
 });
