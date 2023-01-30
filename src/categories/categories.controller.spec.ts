@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { Category } from './category.interface';
 import { CategoriesController } from './categories.controller';
 import { CategoriesService } from './categories.service';
+import { NotFoundException } from '@nestjs/common';
 
 describe('CategoriesController', () => {
   let controller: CategoriesController;
@@ -38,6 +39,17 @@ describe('CategoriesController', () => {
       jest.spyOn(service, 'findOne').mockImplementation(() => result);
 
       expect(controller.findOne(69)).toBe(result);
+    });
+
+    it('should return 404 if category does not exist', () => {
+      const spy = jest
+        .spyOn(service, 'findOne')
+        .mockImplementation((_) => undefined);
+
+      expect(() => {
+        controller.findOne(420);
+      }).toThrow(new NotFoundException('Category with this id does not exist'));
+      expect(spy).toHaveBeenCalledWith(420);
     });
   });
 });

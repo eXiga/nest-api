@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Threat, ThreatTypes, SeverityTypes } from './threat.interface';
-import { randomDate, random } from '@utils/random';
+import { randomDate, random } from '../utils/random';
 
 @Injectable()
 export class ThreatsService {

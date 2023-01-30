@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Category } from './category.interface';
-import { random } from '@utils/random';
+import { random } from '../utils/random';
 
 @Injectable()
 export class CategoriesService {
