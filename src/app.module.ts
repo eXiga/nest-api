@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { APP_GUARD } from '@nestjs/core';
+import { CategoriesModule } from './categories/categories.module';
+import { XRequestIdGuard } from './common/guards/xrid.guard';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [CategoriesModule],
+  providers: [{ provide: APP_GUARD, useClass: XRequestIdGuard }],
 })
 export class AppModule {}
