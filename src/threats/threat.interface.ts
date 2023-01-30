@@ -1,7 +1,7 @@
-const ThreatTypes = ['DDOS', 'PhishingSite', 'FraudSite'] as const;
+export const ThreatTypes = ['DDOS', 'PhishingSite', 'FraudSite'] as const;
 type ThreatType = (typeof ThreatTypes)[number];
 
-const SeverityTypes = ['Low', 'Medium', 'High'] as const;
+export const SeverityTypes = ['Low', 'Medium', 'High'] as const;
 type SeverityType = (typeof SeverityTypes)[number];
 
 export interface Threat {

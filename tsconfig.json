@@ -18,7 +18,7 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@interfaces/*": ["src/interfaces/*"]
+      "@utils/*": ["src/utils/*"]
     }
   }
 }

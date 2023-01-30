@@ -1,40 +1,24 @@
 import { Injectable } from '@nestjs/common';
-import { Threat } from './threat.interface';
-
-function randomDate(): Date {
-  const from = new Date(2023, 0, 1);
-  const to = new Date();
-
-  return new Date(
-    from.getTime() + Math.random() * (to.getTime() - from.getTime()),
-  );
-}
+import { Threat, ThreatTypes, SeverityTypes } from './threat.interface';
+import { randomDate, random } from '@utils/random';
 
 @Injectable()
 export class ThreatsService {
-  private readonly threats: Threat[] = [
-    {
-      id: 1,
-      categoryId: 1,
-      type: 'DDOS',
-      severity: 'High',
-      date: randomDate(),
-    },
-    {
-      id: 2,
-      categoryId: 2,
-      type: 'FraudSite',
-      severity: 'Low',
-      date: randomDate(),
-    },
-    {
-      id: 3,
-      categoryId: 2,
-      type: 'PhishingSite',
-      severity: 'Medium',
-      date: randomDate(),
-    },
-  ];
+  private readonly threats: Threat[] = [];
+
+  constructor() {
+    for (let i = 0; i < 40; i++) {
+      const threat = {
+        id: i + 1,
+        categoryId: random(1, 2),
+        type: ThreatTypes[random(0, 2)],
+        severity: SeverityTypes[random(0, 2)],
+        date: randomDate(),
+      };
+
+      this.threats.push(threat);
+    }
+  }
 
   findAll(): Threat[] {
     return this.threats;
