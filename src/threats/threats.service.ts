@@ -24,6 +24,10 @@ export class ThreatsService {
     return this.threats;
   }
 
+  findPaginated(page: number, pageSize: number): Threat[] {
+    return this.threats.slice((page - 1) * pageSize, page * pageSize);
+  }
+
   findOne(id: number): Threat | undefined {
     return this.threats.find((threat) => threat.id == id);
   }

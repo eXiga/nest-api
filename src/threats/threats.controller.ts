@@ -4,6 +4,7 @@ import {
   NotFoundException,
   Param,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { ThreatsService } from './threats.service';
 import { Threat } from './threat.interface';
@@ -13,8 +14,15 @@ export class ThreatsController {
   constructor(private readonly threatsService: ThreatsService) {}
 
   @Get()
-  findAll(): Threat[] {
-    return this.threatsService.findAll();
+  findAll(
+    @Query('page') page: number,
+    @Query('pageSize') pageSize: number,
+  ): Threat[] {
+    if (page == undefined || pageSize == undefined) {
+      return this.threatsService.findAll();
+    } else {
+      return this.threatsService.findPaginated(page, pageSize);
+    }
   }
 
   @Get(':id')
