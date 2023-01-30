@@ -29,7 +29,7 @@ export class ThreatsController {
   findOne(@Param('id', ParseIntPipe) id: number): Threat {
     const threat = this.threatsService.findOne(id);
     if (threat === undefined) {
-      throw new NotFoundException('Category with this id does not exist');
+      throw new NotFoundException('Threat with this id does not exist');
     }
 
     return threat;
