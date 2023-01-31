@@ -11,8 +11,8 @@ export class ThreatsService {
       const threat = {
         id: i + 1,
         categoryId: random(1, 2),
-        type: ThreatTypes[random(0, 2)],
-        severity: SeverityTypes[random(0, 2)],
+        type: ThreatTypes[random(0, ThreatTypes.length - 1)],
+        severity: SeverityTypes[random(0, SeverityTypes.length - 1)],
         date: randomDate(),
       };
 
