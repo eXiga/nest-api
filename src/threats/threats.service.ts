@@ -30,6 +30,16 @@ export class ThreatsService {
     return this.threats.filter((threat) => threat.categoryId === categoryId);
   }
 
+  findForCategoryPaginated(
+    categoryId: number,
+    page: number,
+    pageSize: number,
+  ): Threat[] {
+    return this.threats
+      .filter((threat) => threat.categoryId === categoryId)
+      .slice((page - 1) * pageSize, page * pageSize);
+  }
+
   findPaginated(page: number, pageSize: number): Threat[] {
     return this.threats.slice((page - 1) * pageSize, page * pageSize);
   }

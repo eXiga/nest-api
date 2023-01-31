@@ -4,6 +4,7 @@ import {
   NotFoundException,
   Param,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { Category } from './category.interface';
 import { CategoriesService } from './categories.service';
@@ -33,12 +34,23 @@ export class CategoriesController {
   }
 
   @Get(':id/threats')
-  findThreats(@Param('id', ParseIntPipe) id: number): Threat[] {
+  findThreats(
+    @Param('id', ParseIntPipe) id: number,
+    @Query('page') qPage: number,
+    @Query('pageSize') qPageSize: number,
+  ): Threat[] {
     const category = this.categoriesService.findOne(id);
     if (category === undefined) {
       throw new NotFoundException(`Category with id: ${id} does not exist`);
     }
 
-    return this.threatsService.findForCategory(category.id);
+    const page = qPage == undefined ? 1 : qPage;
+    const pageSize = qPageSize == undefined ? 20 : qPageSize;
+
+    return this.threatsService.findForCategoryPaginated(
+      category.id,
+      page,
+      pageSize,
+    );
   }
 }
