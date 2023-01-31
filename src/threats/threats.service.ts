@@ -18,6 +18,8 @@ export class ThreatsService {
 
       this.threats.push(threat);
     }
+
+    this.threats.sort((a, b) => b.date.getTime() - a.date.getTime());
   }
 
   findAll(): Threat[] {
