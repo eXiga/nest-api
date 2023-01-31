@@ -15,14 +15,13 @@ export class ThreatsController {
 
   @Get()
   findAll(
-    @Query('page') page: number,
-    @Query('pageSize') pageSize: number,
+    @Query('page') qPage: number,
+    @Query('pageSize') qPageSize: number,
   ): Threat[] {
-    if (page == undefined || pageSize == undefined) {
-      return this.threatsService.findAll();
-    } else {
-      return this.threatsService.findPaginated(page, pageSize);
-    }
+    const page = qPage == undefined ? 1 : qPage;
+    const pageSize = qPageSize == undefined ? 20 : qPageSize;
+
+    return this.threatsService.findPaginated(page, pageSize);
   }
 
   @Get(':id')

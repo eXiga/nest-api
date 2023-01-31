@@ -39,8 +39,6 @@ export class CategoriesController {
       throw new NotFoundException(`Category with id: ${id} does not exist`);
     }
 
-    return this.threatsService
-      .findAll()
-      .filter((threat) => threat.categoryId == category.id);
+    return this.threatsService.findForCategory(category.id);
   }
 }
